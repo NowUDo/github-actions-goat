@@ -1,0 +1,18 @@
+name: Renovate
+on:
+  workflow_dispatch:
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+      - name: Checkout Code
+        uses: actions/checkout@v2.0.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v39.0.5
+        with:
+          renovate-version: 37
+          configurationFile: .github/renovate.json
+          token: '${{ secrets.GITHUB_TOKEN }}'
